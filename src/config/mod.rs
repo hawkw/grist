@@ -1,12 +1,13 @@
 use std::path::PathBuf;
 use std::error::Error;
+use std::fmt::{Display,Debug};
 
 use toml::{self,Value,ParserError};
 
 #[cfg(test)]
 mod tests;
 
-static DEFAULTS: Options = Options {
+pub static DEFAULTS: Options = Options {
     debug: false,
     roots: None,
     port: 3000
@@ -15,6 +16,7 @@ static DEFAULTS: Options = Options {
 
 pub type ParseResult = Result<Options,String>;
 
+#[derive(Clone,Debug)]
 pub struct Options {
     pub debug: bool,
     pub roots: Option<Vec<PathBuf>>,
