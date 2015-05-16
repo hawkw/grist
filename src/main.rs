@@ -51,13 +51,13 @@ fn main() {
         .unwrap_or(config::DEFAULTS.clone());
 
     // set log level from configs
-    let _ = if configs.debug {
-        log::set_logger(|max_log_level| {
+    if configs.debug {
+        let _ = log::set_logger(|max_log_level| {
             max_log_level.set(log::LogLevelFilter::Debug);
             Box::new(loggers::DebugLogger)
         });
     } else {
-        log::set_logger(|max_log_level| {
+        let _ = log::set_logger(|max_log_level| {
             max_log_level.set(log::LogLevelFilter::Info);
             Box::new(loggers::DefaultLogger)
         });

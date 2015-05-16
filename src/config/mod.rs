@@ -1,8 +1,7 @@
 use std::path::PathBuf;
 use std::error::Error;
-use std::fmt::{Display,Debug};
 
-use toml::{self,Value,ParserError};
+use toml::{Value,ParserError};
 
 #[cfg(test)]
 mod tests;
