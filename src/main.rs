@@ -68,7 +68,7 @@ fn main() {
         vec![env::current_dir().unwrap()]
     );
 
-    info!("Starting Grist in {:?}", roots);
+    info!("Searching {:?} for repositories", roots);
 
     let repos: Vec<Repository> = roots.iter().flat_map(|ref root: &PathBuf| {
         fs::read_dir(root) // walk the root dir
@@ -89,6 +89,8 @@ fn main() {
     info!("Discovered {} repositories.", repos.len());
 
     // serve sample hello world page for now
-    Iron::new(servers::hello_world).http("localhost:3000").unwrap();
-
+    info!("Starting Grist on port {}", configs.port);
+    Iron::new(servers::hello_world)
+        .http(AsRef::<str>::as_ref(&format!("localhost:{}", configs.port)))
+        .unwrap();
 }
