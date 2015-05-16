@@ -17,12 +17,26 @@ use git2::Repository;
 
 use iron::prelude::*;
 
-/// Contains various logger implementations for Grist
-mod loggers;
-/// Contains Iron server functions
-mod servers;
-/// Contains code related to configuration file parsing
-mod config;
+/// Contains various logger implementations for Grist.
+///
+/// TODO: log to a file in addition to the console
+/// TODO: log to /var/log/
+pub mod loggers;
+
+/// Contains Iron server functions.
+pub mod servers;
+
+/// Contains code related to setting Grist's configuration.
+///
+/// Currently, configurations are set from a TOML configuration
+/// file stored in `~/.gristconfig.toml`. Eventually, functionality
+/// will be added to also allow configurations to be set from the
+/// command-line, falling back to `~/.gristconfig.toml` and finally
+/// to the defaults.
+///
+/// TODO: add command-line argument parsing
+/// TODO: allow log file to be set from configs
+pub mod config;
 
 fn main() {
 
