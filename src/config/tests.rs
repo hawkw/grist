@@ -2,7 +2,6 @@ use super::parse_toml;
 use std::path::PathBuf;
 
 static TEST_TOML: &'static str = r#"
-    [grist]
     roots = ['~/a', '/b/']
     port  = 3000
 
