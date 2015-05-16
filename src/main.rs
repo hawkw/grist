@@ -4,6 +4,7 @@
 extern crate log;
 extern crate git2;
 extern crate iron;
+extern crate toml;
 
 use std::env;
 use std::fs::{self, PathExt};
@@ -12,8 +13,12 @@ use git2::Repository;
 
 use iron::prelude::*;
 
+/// Contains various logger implementations for Grist
 mod loggers;
+/// Contains Iron server functions
 mod servers;
+/// Contains code related to configuration file parsing
+mod config;
 
 fn main() {
 
