@@ -72,12 +72,12 @@ fn main() {
 
     let repos: Vec<Repository> = roots.iter().flat_map(|ref root: &PathBuf| {
         fs::read_dir(root) // walk the root dir
-            .unwrap()
+            .unwrap() // we are assuming the directory is valid (for now)
             .filter_map( |entry| match entry {
                 Ok(ref dir) if dir.path().is_dir() => { // found a dir
                     debug!("Found directory: {:?}", dir.path());
                     match Repository::init(dir.path()) { // attempt to open dir as git repo
-                        Ok(repo) => { info!("Found repository: {:?}", dir.path()); Some(repo) },
+                        Ok(repo) => { debug!("Found repository: {:?}", dir.path()); Some(repo) },
                         Err(why) => { warn!("Failed to open {:?}: {}", dir.path(), why); None }
                     }
                 },
