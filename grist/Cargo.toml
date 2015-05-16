@@ -1,0 +1,4 @@
+[package]
+name = "grist"
+version = "0.0.1"
+authors = ["Hawk Weisman <hi@hawkweisman.me>"]
