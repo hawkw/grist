@@ -1,4 +1,11 @@
 [package]
-name = "grist"
-version = "0.0.1"
-authors = ["Hawk Weisman <hi@hawkweisman.me>"]
+name     = "grist"
+version  = "0.0.1"
+authors  = ["Hawk Weisman <hi@hawkweisman.me>"]
+license  = "MIT"
+homepage = "https://github.com/hawkw/grist"
+
+[dependencies]
+iron    = "*"
+git2    = "^0.2.10"
+log     = "^0.3.1"
