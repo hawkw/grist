@@ -45,6 +45,15 @@ pub fn parse_toml(config: &str) -> ParseResult {
             .lookup("port")
             .and_then(|ref v: &Value| v.as_integer())
             .unwrap_or(DEFAULTS.port.clone()),
-        roots: DEFAULTS.roots.clone()
+        roots: value
+            .lookup("roots")
+            .map(|v: &Value|
+                v
+                .as_slice()
+                .unwrap()
+                .iter()
+                .map(|ref p| PathBuf::from(p.as_str().unwrap()))
+                .collect::<Vec<_>>()
+                )
     })
 }

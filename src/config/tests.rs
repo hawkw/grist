@@ -24,5 +24,5 @@ fn test_toml_debug() {
 #[test]
 fn test_toml_roots() {
     let result = parse_toml(TEST_TOML).unwrap();
-    assert_eq!(result.roots, Some(vec!(PathBuf::from("~/a"), PathBuf::from("/b/"))));
+    assert_eq!(result.roots, Some(vec![PathBuf::from("~/a"), PathBuf::from("/b/")]) );
 }
