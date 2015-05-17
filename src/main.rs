@@ -24,7 +24,7 @@ use iron::prelude::*;
 pub mod loggers;
 
 /// Contains Iron server functions.
-pub mod servers;
+pub mod handlers;
 
 /// Contains code related to setting Grist's configuration.
 ///
