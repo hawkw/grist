@@ -63,9 +63,8 @@ fn main() {
         });
     };
 
-    let roots = configs.roots.unwrap_or(
-        // get the current working dir, assume that we are in a valid directory
-        vec![env::current_dir().unwrap()]
+    let roots = configs.roots.unwrap_or(  // use the roots from the config file, or...
+        vec![env::current_dir().unwrap()] // use the current working dir (assuming it's valid)
     );
 
     info!("Searching {:?} for repositories", roots);
@@ -77,12 +76,18 @@ fn main() {
                 Ok(ref dir) if dir.path().is_dir() => { // found a dir
                     debug!("Found directory: {:?}", dir.path());
                     match Repository::init(dir.path()) { // attempt to open dir as git repo
-                        Ok(repo) => { debug!("Found repository: {:?}", dir.path()); Some(repo) },
-                        Err(why) => { warn!("Failed to open {:?}: {}", dir.path(), why); None }
+                        Ok(repo) => {
+                            // found a valid git repository!
+                            // TODO: should probably track names of repos here
+                            debug!("Found repository: {:?}", dir.path()); Some(repo) },
+                        Err(why) => {
+                            // plenty of dirs are not git repos; but we should mention it
+                            // in the log for debugging purposes
+                            debug!("Failed to open {:?}: {}", dir.path(), why); None }
                     }
                 },
-                Err(why) => { warn!("Could not read entry: {}", why); None },
-                Ok(ref e)=> { debug!("{:?} is not a directory.", e.path()); None }
+                Ok(ref e)=> { debug!("{:?} is not a directory.", e.path()); None },
+                Err(why) => { warn!("Could not read entry: {}", why); None }
             })
     }).collect();
 
