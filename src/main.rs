@@ -95,7 +95,7 @@ fn main() {
 
     // serve sample hello world page for now
     info!("Starting Grist on port {}", configs.port);
-    Iron::new(servers::hello_world)
+    Iron::new(handlers::hello_world)
         .http(AsRef::<str>::as_ref(&format!("localhost:{}", configs.port)))
         .unwrap();
 }
